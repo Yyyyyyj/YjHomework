@@ -9,7 +9,7 @@ import java.util.List;
 
 import org.junit.Test;
 
-public class HomeWork {
+public class PokerGame {
 	
 	@Test
 	public void diffRank() {
