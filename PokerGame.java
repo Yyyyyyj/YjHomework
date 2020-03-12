@@ -27,8 +27,13 @@ public class PokerGame {
 	}
 	
 	@Test
-	public void sameRank1SameStart() {
+	public void sameRank1SameOneStart() {
 		assertTrue(texasHoldemPoker("2H 3D 5S 9C KD", "2C 3H 4S 8C KH") == "Black wins");
+	}
+	
+	@Test
+	public void sameRank3SameTwoStart() {
+		assertTrue(texasHoldemPoker("QD QS 8S 8A 3S", "QD QS 8S 8A 9D") == "White wins");
 	}
 	
 	@Test
@@ -67,10 +72,12 @@ public class PokerGame {
 		else if(blackRank < whiteRank) {
 			return "White wins";
 		}else {
+			//先取重复次数更多的数
 			for(int i=whitevalues.size()-1; i>=0; i--) {
 				if(whitevalues.get(i).size()>0) {
 					List<Integer> whiteList = new ArrayList<Integer>(whitevalues.get(i));
 					List<Integer> blackList = new ArrayList<Integer>(blackvalues.get(i));
+					//取该重复次数下值更大的数
 					for(int j=whiteList.size()-1; j>=0; j--) {
 						if(blackList.get(j) > whiteList.get(j)) {
 							return "Black wins";
