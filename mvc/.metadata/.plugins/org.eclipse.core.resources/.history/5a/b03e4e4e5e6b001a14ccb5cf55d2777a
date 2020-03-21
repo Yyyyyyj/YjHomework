@@ -1,0 +1,20 @@
+package com.yj.homework.model;
+
+import java.util.List;
+
+
+public interface TaskMapper {
+
+	@Select("SELECT * FROM TASK WHERE ID = #{id}")
+    Task selectById(@Param("id") Long id);
+	
+	@Select("SELECT * FROM TASK")
+    List<Task> selectAll();
+
+	//数据库设置id自增
+    @Insert("INSERT INTO TASK(CONTENT,CREATEDTIME) VALUES(#{content},#{createdTime})")
+    int insert(@Param("content") String content,@Param("createdTime") String createdTime);
+
+    @Delete("DELETE FROM TASK WHERE ID =#{id}")
+    void delete(Long id);
+}
