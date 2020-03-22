@@ -35,7 +35,7 @@ public class TaskController {
 		if(taskList != null && taskList.size()>0) {
 			return Result.build(200, "success", taskList);
 		}else {
-			return Result.build(200, "there is no task", null);
+			return Result.build(200, "Task list is empty", null);
 		}
     }
 
@@ -51,7 +51,7 @@ public class TaskController {
 		Long id = task.getId();
 		for(Task taskExist: tasks.values()) {
 			if(id == taskExist.getId()) {
-				return Result.build(200, "id已存在", null);
+				return Result.build(200, "Task ID already exists", null);
 			}
 		}
 		tasks.put((long) (size+1), task);
@@ -71,7 +71,7 @@ public class TaskController {
 				return Result.build(200, "success", task);
 			}
 		}
-		return Result.build(200, "task don't exist", null);
+		return Result.build(200, "There is no task with this id", null);
     }
 	
 	/**
@@ -81,6 +81,9 @@ public class TaskController {
 	 */
 	@DeleteMapping("/{id}")
 	public Result delectTaskById(@PathVariable Long id) {
+		if(tasks.size() == 0) {
+			return Result.build(200, "Task list is empty", null);
+		}
 		for(Long i: tasks.keySet()) {
 			Task task = tasks.get(i);
 			if(task.getId() == id) {
@@ -88,7 +91,7 @@ public class TaskController {
 				return Result.build(200, "success", null);
 			}
 		}
-		return Result.build(200, "task don't exist", null);
+		return Result.build(200, "There is no task with this id", null);
     }
 	
 }
